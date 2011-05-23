@@ -1,7 +1,7 @@
 <?php
 
 // register the DataTable autoloader
-include('../php-5.2/src/DataTable/Autoloader.php');
+include('../src/DataTable/Autoloader.php');
 spl_autoload_register(array('DataTable_Autoloader', 'autoload'));
 
 // include the Demo DataTable class
