@@ -17,11 +17,11 @@
  */
 class Browser
 {
-  public $renderingEngine;  	
-  public $browser;  	
-  public $platform;  	
-  public $engineVersion;  	
-  public $cssGrade;
+  private $renderingEngine;  	
+  private $browser;  	
+  private $platform;  	
+  private $engineVersion;  	
+  private $cssGrade;
   
   public function __construct($renderingEngine, $browser, $platform, $engineVersion, $cssGrade)
   {
