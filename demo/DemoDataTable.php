@@ -3,6 +3,15 @@
 // include the Browser entity class
 include('Browser.php');
 
+/**
+ * Demonstration of implementing DataTable_DataTable
+ * 
+ * This class shows how to extend and implement DataTable_DataTable
+ * 
+ * As a simple example this table is set up as an AJAX-enabled
+ * table and pulls it's data from the local 'browsers.csv' file.
+ * 
+ */
 class DemoDataTable extends DataTable_DataTable
 {
   /**
@@ -16,21 +25,16 @@ class DemoDataTable extends DataTable_DataTable
     // create first column
     $column1 = new DataTable_Column();
     $column1->setName("renderingEngine")
-            ->setLabel("Rendering Engine")
+            ->setTitle("Rendering Engine")
             ->setGetMethod("getRenderingEngine")
             ->setSortKey("renderingEngine")
             ->setIsSortable(true)
-            ->setIsDefaultSort(true)
-            ->setRenderFunction("
-                                  function ( oObj ) {
-                      				return oObj.aData[0] +' ----- '+ oObj.aData[3];
-                      			}
-            ");
+            ->setIsDefaultSort(true);
 
     // create second column
     $column2 = new DataTable_Column();
     $column2->setName("browser")
-            ->setLabel("Browser")
+            ->setTitle("Browser")
             ->setGetMethod("getBrowser")
             ->setSortKey("browser")
             ->setIsSortable(true)
@@ -39,40 +43,40 @@ class DemoDataTable extends DataTable_DataTable
     // create third column
     $column3 = new DataTable_Column();
     $column3->setName("platform")
-            ->setLabel("Platform(s)")
+            ->setTitle("Platform(s)")
             ->setGetMethod("getPlatform")
             ->setSortKey("platform")
             ->setIsSortable(true)
             ->setIsDefaultSort(false);
 
-    // create third column
+    // create fourth column
     $column4 = new DataTable_Column();
     $column4->setName("engineVersion")
-            ->setLabel("Engine Version")
+            ->setTitle("Engine Version")
             ->setGetMethod("getEngineVersion")
             ->setSortKey("engineVersion")
             ->setIsSortable(true)
             ->setIsDefaultSort(false);
     
-    // create third column
+    // create fifth column
     $column5 = new DataTable_Column();
     $column5->setName("cssGrade")
-            ->setLabel("CSS Grade")
+            ->setTitle("CSS Grade")
             ->setGetMethod("getCssGrade")
             ->setSortKey("cssGrade")
             ->setIsSortable(true)
             ->setIsDefaultSort(false);
 
-    // create third column
+    // create the actions column
     $column6 = new DataTable_Column();
     $column6->setName("actions")
-            ->setLabel("Actions")
+            ->setTitle("Actions")
             ->setGetMethod("getActions");
     
-    // create invisible column
+    // create an invisible column
     $column7 = new DataTable_Column();
     $column7->setName("invisible")
-             ->setLabel("Invisible")
+             ->setTitle("Invisible")
              ->setIsVisible(false)
              ->setGetMethod("getInvisible");
     
@@ -106,17 +110,13 @@ class DemoDataTable extends DataTable_DataTable
     $config->setIsInfoEnabled(true);
 
     $config->setIsSortEnabled(true);
-    //$config->setScrollY("200px");
     $config->setIsAutoWidthEnabled(true);
     $config->setIsScrollCollapseEnabled(false);
     $config->setPaginationType(DataTable_Config::PAGINATION_TYPE_FULL_NUMBERS);
     $config->setIsJQueryUIEnabled(false);
     $config->setIsServerSideEnabled(true);
-    $config->setIsSaveStateEnabled(true);
-    $config->setCookiePrefix("my_table_prefix_");
-    $config->setStripClasses(array('odd', 'even', 'even'));
-    
-    // pass DataTableConfig to the parent
+
+    // pass DataTable_Config to the parent
     parent::__construct($config);
   }
 
@@ -162,7 +162,7 @@ class DemoDataTable extends DataTable_DataTable
   }
 
   /**
-   * Build the data for the 'Actions' column
+   * Format the data for the 'Actions' column
    * 
    * @param Browser $browser
    */
@@ -174,11 +174,21 @@ class DemoDataTable extends DataTable_DataTable
     return $html;
   }
   
+  /**
+   * Format the data for the 'invisible' column
+   * 
+   * @param Browser $browser
+   */
   protected function getInvisible(Browser $browser)
   {
     return $browser->getBrowser() . ' --- ' . $browser->getPlatform();
   }
 
+  /**
+   * Add a callback function for 'fnRowCallback'
+   * 
+   * @return string
+   */
   protected function getRowCallbackFunction()
   {
     return "
@@ -193,64 +203,7 @@ class DemoDataTable extends DataTable_DataTable
             }
     ";
   }
-  
-  protected function getInitCompleteFunction2()
-  {
-    return "
-            function() {
-              alert( 'DataTables has finished it\'s initialisation.' );
-            }
-    ";
-  }
-  
-  protected function getDrawCallbackFunction()
-  {
-    return "
-            function() {
-              
-            }
-    ";
-  }
-  
-  protected function getFooterCallbackFunction2()
-  {
-    return "
-            function( nFoot, aasData, iStart, iEnd, aiDisplay ) {
-            	console.log(nFoot);
-            }
-    ";
-  }
-  
-  protected function getHeaderCallbackFunction()
-  {
-    return "
-            function( nHead, aasData, iStart, iEnd, aiDisplay ) {
-            	nHead.getElementsByTagName('th')[0].innerHTML = 'Displaying '+(iEnd-iStart)+' records';
-            }
-    
-    ";
-  }
-  
-  protected function getInfoCallbackFunction2()
-  {
-    return "
-            function( oSettings, iStart, iEnd, iMax, iTotal, sPre ) {
-            		return iStart + ' to ' + iEnd;
-            }
-    ";
-  }
-  
-  protected function getCookieCallbackFunction()
-  {
-    return "
-    		function (sName, oData, sExpires, sPath){ 
-    			cookie = sName + '=' + JSON.stringify(oData) + '; expires=' + sExpires +'; path=' + sPath;
-    			console.log(cookie);
-    			return cookie;
-    		}
-    ";
-  }
-  
+
   /**
    * ==========================================================================
    * Utility Methods for Demo

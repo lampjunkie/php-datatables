@@ -241,9 +241,9 @@ abstract class DataTable_DataTable
 
     foreach($this->config->getColumns() as $column){
       if($column->isVisible()){
-        $html .= "<th>{$column->getLabel()}</th>";
+        $html .= "<th>{$column->getTitle()}</th>";
 	  } else {
-        $html .= "<th style=\"display: none;\">{$column->getLabel()}</th>";
+        $html .= "<th style=\"display: none;\">{$column->getTitle()}</th>";
 	  }    
     }
 

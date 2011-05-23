@@ -24,13 +24,13 @@ class DataTable_Column
   protected $name;
   
   /**
-   * The label for the column
+   * The title for the column
    * 
    * This value is used in the rendering of the table's <thead>
    * 
    * @var string
    */
-  protected $label;
+  protected $title;
   
   /**
    * The name of the getter method that should be called on either
@@ -108,15 +108,15 @@ class DataTable_Column
     return $this->name;
   }
 
-  public function setLabel($label)
+  public function setTitle($title)
   {
-    $this->label = $label;
+    $this->title = $title;
     return $this;
   }
 
-  public function getLabel()
+  public function getTitle()
   {
-    return $this->label;
+    return $this->title;
   }
 
   public function setGetMethod($getMethod)
