@@ -236,7 +236,8 @@ abstract class DataTable_DataTable
    */
   protected function renderHtml()
   {
-    $html = "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"{$this->config->getClass()}\" id=\"{$this->getTableId()}\">";
+    $html = '';
+    $html .= "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"{$this->config->getClass()}\" id=\"{$this->getTableId()}\">";
     $html .= "<thead><tr>";
 
     foreach($this->config->getColumns() as $column){
@@ -249,7 +250,7 @@ abstract class DataTable_DataTable
 
     $html .= "</tr></thead>";
     $html .= "<tbody>";
-    
+
     if(!$this->config->isServerSideEnabled()){
       
       $html .= $this->renderStaticData();
@@ -262,6 +263,8 @@ abstract class DataTable_DataTable
     $html .= "</tbody>";
     $html .= "</table>";
 
+    $html .= "<!-- Built with LampJunkie php-datatables -->";
+    
     return $html;
   }
 

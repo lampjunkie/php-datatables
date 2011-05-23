@@ -1,15 +1,11 @@
-php-datatables
-==============
+# php-datatables
 
-This is a php library which wraps around the DataTables (http://www.datatables.net) plugin for jQuery.
+This is a PHP library which wraps around the DataTables (http://www.datatables.net) plugin for jQuery.
 
 This library provides a object-oriented interface to configure and build javascript data tables. The goal
 of this library is to provide an easily extendable framework that allows DataTables to be easily incorporated
 into any existing application or web framework. The library provides the means to build DataTables that can 
 render data from any source including databases, web services, csv files, etc...
-
-php-datatables doesn't care how or where the data for the table is obtained. The only assumption is that
-your data is provided as an array of entity objects which each have standard getter methods.
 
 php-datatables is released with dual licensing, using the GPL v2 (license-gpl2.txt) and an BSD style 
 license (license-bsd.txt). Please see the corresponding license file for details of these licenses. 
