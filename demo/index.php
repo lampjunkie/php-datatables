@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This example demonstrates how to use a DataTable for displaying
+ * data pulled from a server through an ajax request.
+ * 
+ * Be sure to download the DataTables jQuery plugin from http://http://datatables.net/download/
+ * and extract it within this folder
+ */
+
 // register the DataTable autoloader
 include('../src/DataTable/Autoloader.php');
 spl_autoload_register(array('DataTable_Autoloader', 'autoload'));
@@ -7,14 +15,11 @@ spl_autoload_register(array('DataTable_Autoloader', 'autoload'));
 // include the Demo DataTable class
 include('DemoDataTable.php');
 
-
 // instantiate the DataTable
 $table = new DemoDataTable();
 
 // set the url to the ajax script
 $table->setAjaxDataUrl('ajax.php');
-
-
 
 ?>
 <html>
@@ -33,6 +38,7 @@ $table->setAjaxDataUrl('ajax.php');
 
 <body>
 
+	<?php // render the initial DataTable HTML and JS ?>
 	<?php echo $table->render(); ?>
 
 </body>
