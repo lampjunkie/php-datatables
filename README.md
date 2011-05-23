@@ -11,6 +11,10 @@ render data from any source including databases, web services, csv files, etc...
 php-datatables doesn't care how or where the data for the table is obtained. The only assumption is that
 your data is provided as an array of entity objects which each have standard getter methods.
 
+php-datatables is released with dual licensing, using the GPL v2 (license-gpl2.txt) and an BSD style 
+license (license-bsd.txt). Please see the corresponding license file for details of these licenses. 
+You are free to use, modify and distribute this software, but all copyright information must remain.
+
 ## Overview
 
 ## Class Overview
