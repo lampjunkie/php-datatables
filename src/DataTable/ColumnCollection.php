@@ -28,6 +28,7 @@ class DataTable_ColumnCollection implements Iterator
   public function add(DataTable_Column $item)
   {
     $this->items[] = $item;
+    return $this;
   }
 
   public function get($index)

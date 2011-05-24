@@ -2,16 +2,16 @@
 
 /**
  * This file is part of the DataTable package
- * 
+ *
  * (c) Marc Roulias <marc@lampjunkie.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
  * This class holds all of the configuration values for a DataTable
- * 
+ *
  * @package DataTable
  * @author	Marc Roulias <marc@lampjunkie.com>
  */
@@ -28,13 +28,13 @@ class DataTable_Config
    * @var DataTable_ColumnCollection
    */
   protected $columns;
-  
+
   /**
    * The default display length of the table
    * @var integer
    */
   protected $displayLength = 15;
-  
+
   /**
    * The AJAX source URL
    * @var string
@@ -72,6 +72,7 @@ class DataTable_Config
   public function setColumns($columns)
   {
     $this->columns = $columns;
+    return $this;
   }
 
   public function getColumns()
@@ -82,6 +83,7 @@ class DataTable_Config
   public function setDisplayLength($displayLength)
   {
     $this->displayLength = $displayLength;
+    return $this;
   }
 
   public function getDisplayLength()
@@ -92,6 +94,7 @@ class DataTable_Config
   public function setIsPaginationEnabled($isPaginationEnabled)
   {
     $this->isPaginationEnabled = $isPaginationEnabled;
+    return $this;
   }
 
   public function isPaginationEnabled()
@@ -102,6 +105,7 @@ class DataTable_Config
   public function setIsLengthChangeEnabled($isLengthChangeEnabled)
   {
     $this->isLengthChangeEnabled = $isLengthChangeEnabled;
+    return $this;
   }
 
   public function isLengthChangeEnabled()
@@ -112,6 +116,7 @@ class DataTable_Config
   public function setIsFilterEnabled($isFilterEnabled)
   {
     $this->isFilterEnabled = $isFilterEnabled;
+    return $this;
   }
 
   public function isFilterEnabled()
@@ -122,6 +127,7 @@ class DataTable_Config
   public function setIsInfoEnabled($isInfoEnabled)
   {
     $this->isInfoEnabled = $isInfoEnabled;
+    return $this;
   }
 
   public function isInfoEnabled()
@@ -132,6 +138,7 @@ class DataTable_Config
   public function setIsSortEnabled($isSortEnabled)
   {
     $this->isSortEnabled = $isSortEnabled;
+    return $this;
   }
 
   public function isSortEnabled()
@@ -142,6 +149,7 @@ class DataTable_Config
   public function setAjaxSource($ajaxSource)
   {
     $this->ajaxSource = $ajaxSource;
+    return $this;
   }
 
   public function getAjaxSource()
@@ -152,6 +160,7 @@ class DataTable_Config
   public function setIsServerSideEnabled($isServerSideEnabled)
   {
     $this->isServerSideEnabled = $isServerSideEnabled;
+    return $this;
   }
 
   public function isServerSideEnabled()
@@ -162,6 +171,7 @@ class DataTable_Config
   public function setIsProcessingEnabled($isProcessingEnabled)
   {
     $this->isProcessingEnabled = $isProcessingEnabled;
+    return $this;
   }
 
   public function isProcessingEnabled()
@@ -172,6 +182,7 @@ class DataTable_Config
   public function setIsJQueryUIEnabled($isJQueryUIEnabled)
   {
     $this->isJQueryUIEnabled = $isJQueryUIEnabled;
+    return $this;
   }
 
   public function isJQueryUIEnabled()
@@ -182,6 +193,7 @@ class DataTable_Config
   public function setIsAutoWidthEnabled($isAutoWidthEnabled)
   {
     $this->isAutoWidthEnabled = $isAutoWidthEnabled;
+    return $this;
   }
 
   public function isAutoWidthEnabled()
@@ -192,6 +204,7 @@ class DataTable_Config
   public function setIsScrollCollapseEnabled($isScrollCollapseEnabled)
   {
     $this->isScrollCollapseEnabled = $isScrollCollapseEnabled;
+    return $this;
   }
 
   public function isScrollCollapseEnabled()
@@ -202,6 +215,7 @@ class DataTable_Config
   public function setClass($class)
   {
     $this->class = $class;
+    return $this;
   }
 
   public function getClass()
@@ -212,6 +226,7 @@ class DataTable_Config
   public function setLengthMenu($lengthMenu)
   {
     $this->lengthMenu = $lengthMenu;
+    return $this;
   }
 
   public function getLengthMenu()
@@ -222,6 +237,7 @@ class DataTable_Config
   public function setScrollX($scrollX)
   {
     $this->scrollX = $scrollX;
+    return $this;
   }
 
   public function getScrollX()
@@ -232,6 +248,7 @@ class DataTable_Config
   public function setScrollY($scrollY)
   {
     $this->scrollY = $scrollY;
+    return $this;
   }
 
   public function getScrollY()
@@ -241,17 +258,19 @@ class DataTable_Config
 
   public function getScrollLoadGap()
   {
-      return $this->scrollLoadGap;
+    return $this->scrollLoadGap;
   }
 
   public function setScrollLoadGap($scrollLoadGap)
   {
-      $this->scrollLoadGap = $scrollLoadGap;
+    $this->scrollLoadGap = $scrollLoadGap;
+    return $this;
   }
-  
+
   public function setPaginationType($paginationType)
   {
     $this->paginationType = $paginationType;
+    return $this;
   }
 
   public function getPaginationType()
@@ -262,6 +281,7 @@ class DataTable_Config
   public function setLanguageConfig(DataTable_LanguageConfig $languageConfig)
   {
     $this->languageConfig = $languageConfig;
+    return $this;
   }
 
   public function getLanguageConfig()
@@ -271,17 +291,19 @@ class DataTable_Config
 
   public function isScrollInfiniteEnabled()
   {
-      return $this->isScrollInfiniteEnabled;
+    return $this->isScrollInfiniteEnabled;
   }
 
   public function setIsScrollInfiniteEnabled($isScrollInfiniteEnabled)
   {
-      $this->isScrollInfiniteEnabled = $isScrollInfiniteEnabled;
+    $this->isScrollInfiniteEnabled = $isScrollInfiniteEnabled;
+    return $this;
   }
 
   public function setLoadingHtml($loadingHtml)
   {
     $this->loadingHtml = $loadingHtml;
+    return $this;
   }
 
   public function getLoadingHtml()
@@ -292,41 +314,45 @@ class DataTable_Config
 
   public function getCookieDuration()
   {
-      return $this->cookieDuration;
+    return $this->cookieDuration;
   }
 
   public function setCookieDuration($cookieDuration)
   {
-      $this->cookieDuration = $cookieDuration;
+    $this->cookieDuration = $cookieDuration;
+    return $this;
   }
 
   public function isSaveStateEnabled()
   {
-      return $this->isSaveStateEnabled;
+    return $this->isSaveStateEnabled;
   }
 
   public function setIsSaveStateEnabled($isSaveStateEnabled)
   {
-      $this->isSaveStateEnabled = $isSaveStateEnabled;
+    $this->isSaveStateEnabled = $isSaveStateEnabled;
+    return $this;
   }
 
   public function getCookiePrefix()
   {
-      return $this->cookiePrefix;
+    return $this->cookiePrefix;
   }
 
   public function setCookiePrefix($cookiePrefix)
   {
-      $this->cookiePrefix = $cookiePrefix;
+    $this->cookiePrefix = $cookiePrefix;
+    return $this;
   }
 
   public function getStripClasses()
   {
-      return $this->stripClasses;
+    return $this->stripClasses;
   }
 
   public function setStripClasses($stripClasses)
   {
-      $this->stripClasses = $stripClasses;
+    $this->stripClasses = $stripClasses;
+    return $this;
   }
 }

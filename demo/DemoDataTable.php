@@ -93,13 +93,13 @@ class DemoDataTable extends DataTable_DataTable
     $config = new DataTable_Config();
     
     // add columns to collection
-    $config->getColumns()->add($column1);
-    $config->getColumns()->add($column2);
-    $config->getColumns()->add($column3);
-    $config->getColumns()->add($column4);
-    $config->getColumns()->add($column5);
-    $config->getColumns()->add($column6);
-    $config->getColumns()->add($column7);
+    $config->getColumns()->add($column1)
+                         ->add($column2)
+                         ->add($column3)
+                         ->add($column4)
+                         ->add($column5)
+                         ->add($column6)
+                         ->add($column7);
      
     // build the language configuration
     $languageConfig = new DataTable_LanguageConfig();
@@ -111,19 +111,18 @@ class DemoDataTable extends DataTable_DataTable
     $config->setLanguageConfig($languageConfig);
 
     // set data table options
-    $config->setClass("display");
-    $config->setDisplayLength(10);
-    $config->setIsPaginationEnabled(true);
-    $config->setIsLengthChangeEnabled(true);
-    $config->setIsFilterEnabled(true);
-    $config->setIsInfoEnabled(true);
-
-    $config->setIsSortEnabled(true);
-    $config->setIsAutoWidthEnabled(true);
-    $config->setIsScrollCollapseEnabled(false);
-    $config->setPaginationType(DataTable_Config::PAGINATION_TYPE_FULL_NUMBERS);
-    $config->setIsJQueryUIEnabled(false);
-    $config->setIsServerSideEnabled(true);
+    $config->setClass("display")
+           ->setDisplayLength(10)
+           ->setIsPaginationEnabled(true)
+           ->setIsLengthChangeEnabled(true)
+           ->setIsFilterEnabled(true)
+           ->setIsInfoEnabled(true)
+           ->setIsSortEnabled(true)
+           ->setIsAutoWidthEnabled(true)
+           ->setIsScrollCollapseEnabled(false)
+           ->setPaginationType(DataTable_Config::PAGINATION_TYPE_FULL_NUMBERS)
+           ->setIsJQueryUIEnabled(false)
+           ->setIsServerSideEnabled(true);
 
     // pass DataTable_Config to the parent
     parent::__construct($config);
@@ -220,7 +219,7 @@ class DemoDataTable extends DataTable_DataTable
    */
 
   /**
-   * Get an array of Users
+   * Get an array of Browser objects
    * 
    * @return array
    */
