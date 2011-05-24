@@ -339,7 +339,7 @@ abstract class DataTable_DataTable
     $js = "
 			<script type=\"text/javascript\">
 			    $(document).ready(function(){
-				$('#{$this->getTableId()}').dataTable({$this->renderDataTableOptions()});
+				var {$this->getTableId()} = $('#{$this->getTableId()}').dataTable({$this->renderDataTableOptions()});
 			    });
 			</script>
 		";
