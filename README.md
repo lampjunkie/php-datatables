@@ -8,7 +8,7 @@ into any existing application or web framework. The library provides the means t
 render data from any source including databases, web services, csv files, etc...
 
 Currently, php-datatables implements a majority of the features and options within DataTables. The remaining
-onces will be added over time.
+ones will be added over time.
 
 php-datatables is released with dual licensing, using the GPL v2 (license-gpl2.txt) and an BSD style 
 license (license-bsd.txt). Please see the corresponding license file for details of these licenses. 
@@ -192,4 +192,25 @@ Render AJAX response (ajax.php):
 		
 		// render the JSON data string
 		echo $table->renderJson($request);
+	
+## Non-AJAX DataTable
+
+If you have a smaller data set that you want to render in a DataTable and thus
+don't need AJAX for your pagination, sorting you can easily switch to non-ajax mode.
+
+You just need to make sure that serverSideEnabled is set to false on your DataTable_Config object.
+
+This will result in your loadData() method getting called when DataTable_Datatable->render() is called. The
+loadData() method will receive a DataTable_Request object which has the sorting set for whatever
+the default sort column is within your config. You may also want to set the staticMaxLength on the
+config object to let your loadData method know how to limit your results.
+
+    Example:
+
+        // disabled ajax
+        $config->setIsServerSideEnabled(false);
+    
+        // let your loadData() method know to limit to 200 results
+        $config->setStaticMaxLength(200);
+	
 		
