@@ -16,6 +16,14 @@ You are free to use, modify and distribute this software, but all copyright info
 
 ## Overview
 
+The basic steps to using php-datatables are:
+
+  1. Set configuration options on a config object.
+  2. Implement a method to load an array of entity objects for your table to render.
+  3. Implement methods to format the data for your columns.
+
+### Demo
+
 Look at the files within the demo/ directory to see a basic example of php-datatables in action.
 
 - ajax.php     
