@@ -30,7 +30,6 @@ class DemoDataTable extends DataTable_DataTable
    */
   public function __construct(DataTable_Config $config = null)
   {
-
     // create first column
     $column1 = new DataTable_Column();
     $column1->setName("renderingEngine")
@@ -85,9 +84,9 @@ class DemoDataTable extends DataTable_DataTable
     // create an invisible column
     $column7 = new DataTable_Column();
     $column7->setName("invisible")
-             ->setTitle("Invisible")
-             ->setIsVisible(false)
-             ->setGetMethod("getInvisible");
+            ->setTitle("Invisible")
+            ->setIsVisible(false)
+            ->setGetMethod("getInvisible");
     
     // create config
     $config = new DataTable_Config();
