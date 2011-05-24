@@ -65,6 +65,13 @@ class DataTable_Config
   protected $stripClasses           = array('odd', 'even');
 
   /**
+   * see http://datatables.net/usage/options#sDom
+   *
+   * @var string
+   */
+  protected $dom;
+
+  /**
    * The maximum number of rows to render in HTML
    * when table is set to use static (non-ajax) data
    *
@@ -372,6 +379,17 @@ class DataTable_Config
   public function setStaticMaxLength($staticMaxLength)
   {
     $this->staticMaxLength = $staticMaxLength;
+    return $this;
+  }
+
+  public function getDom()
+  {
+    return $this->dom;
+  }
+
+  public function setDom($dom)
+  {
+    $this->dom = $dom;
     return $this;
   }
 }

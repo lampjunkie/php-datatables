@@ -402,6 +402,10 @@ abstract class DataTable_DataTable
       $options["sCookiePrefix"]	= $this->config->getCookiePrefix();
     }
     
+    if(!is_null($this->config->getDom())){
+      $options["sDom"] = $this->config->getDom();
+    }
+    
     // =====================================================================================
     // add callback functions
     // =====================================================================================
