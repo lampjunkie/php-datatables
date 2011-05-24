@@ -40,29 +40,37 @@ class DataTable_Config
    * @var string
    */
   protected $ajaxSource;
-  protected $isProcessingEnabled   = true;
-  protected $isServerSideEnabled   = false;
-  protected $isPaginationEnabled   = false;
-  protected $isLengthChangeEnabled = false;
-  protected $isFilterEnabled       = false;
-  protected $isInfoEnabled         = false;
-  protected $isSortEnabled         = true;
-  protected $isJQueryUIEnabled     = true;
-  protected $isAutoWidthEnabled    = true;
+  protected $isProcessingEnabled     = true;
+  protected $isServerSideEnabled     = false;
+  protected $isPaginationEnabled     = false;
+  protected $isLengthChangeEnabled   = false;
+  protected $isFilterEnabled         = false;
+  protected $isInfoEnabled           = false;
+  protected $isSortEnabled           = true;
+  protected $isJQueryUIEnabled       = true;
+  protected $isAutoWidthEnabled      = true;
   protected $isScrollCollapseEnabled = false;
   protected $isScrollInfiniteEnabled = false;
   protected $class;
-  protected $lengthMenu = array(10 => 10, 25 => 25, 50 => 50, 100 => 100);
+  protected $lengthMenu              = array(10 => 10, 25 => 25, 50 => 50, 100 => 100);
   protected $scrollX;
   protected $scrollY;
   protected $scrollLoadGap;
-  protected $paginationType = self::PAGINATION_TYPE_FULL_NUMBERS;
+  protected $paginationType          = self::PAGINATION_TYPE_FULL_NUMBERS;
   protected $languageConfig;
-  protected $loadingHtml = '<p>loading data</p>';
-  protected $cookieDuration = 7200;
-  protected $isSaveStateEnabled = false;
+  protected $loadingHtml            = '<p>loading data</p>';
+  protected $cookieDuration         = 7200;
+  protected $isSaveStateEnabled     = false;
   protected $cookiePrefix;
-  protected $stripClasses = array('odd', 'even');
+  protected $stripClasses           = array('odd', 'even');
+
+  /**
+   * The maximum number of rows to render in HTML
+   * when table is set to use static (non-ajax) data
+   *
+   * @var integer
+   */
+  protected $staticMaxLength        = 100;
 
   public function __construct()
   {
@@ -353,6 +361,17 @@ class DataTable_Config
   public function setStripClasses($stripClasses)
   {
     $this->stripClasses = $stripClasses;
+    return $this;
+  }
+
+  public function getStaticMaxLength()
+  {
+    return $this->staticMaxLength;
+  }
+
+  public function setStaticMaxLength($staticMaxLength)
+  {
+    $this->staticMaxLength = $staticMaxLength;
     return $this;
   }
 }

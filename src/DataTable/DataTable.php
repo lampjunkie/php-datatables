@@ -318,7 +318,7 @@ abstract class DataTable_DataTable
     // make a fake request object
     $request = new DataTable_Request();
     $request->setDisplayStart(0);
-    $request->setDisplayLength(100);
+    $request->setDisplayLength($this->config->getStaticMaxLength());
     $request->setSortColumnIndex($sortColumnIndex);
     $request->setSortDirection($sortDirection);
 
