@@ -205,9 +205,9 @@ loadData() method will receive a DataTable_Request object which has the sorting 
 the default sort column is within your config. You may also want to set the staticMaxLength on the
 config object to let your loadData method know how to limit your results.
 
-    Example:
+  Example:
 
-        // disabled ajax
+        // disable ajax
         $config->setIsServerSideEnabled(false);
     
         // let your loadData() method know to limit to 200 results
