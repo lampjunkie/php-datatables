@@ -141,24 +141,24 @@ class DemoDataTable extends DataTable_DataTable
   public function loadData(DataTable_Request $request)
   {
     // get fake data set
-    $users = $this->loadFakeData('browsers.csv');
+    $results = $this->loadFakeData('browsers.csv');
 
     // search against object array if a search term was passed in
     if(!is_null($request->getSearch())){
-      $users = $this->search($users, $request->getSearch(), array('renderingEngine', 'browser', 'platform', 'engineVersion', 'cssGrade'));
+      $results = $this->search($results, $request->getSearch(), array('renderingEngine', 'browser', 'platform', 'engineVersion', 'cssGrade'));
     }
 
     // get total length of all results (emulate count(*) query)
-    $totalLength = count($users);
+    $totalLength = count($results);
     
     // sort results by sort column passed in
-    $this->sortObjectArray($this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey(), $users, $request->getSortDirection());
+    $this->sortObjectArray($this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey(), $results, $request->getSortDirection());
 
     // limit the results based on parameters passed in
-    $this->limit($users, $request->getDisplayStart(), $request->getDisplayLength());
+    $this->limit($results, $request->getDisplayStart(), $request->getDisplayLength());
     
     // return the final result set
-    return new DataTable_DataResult($users, $totalLength);
+    return new DataTable_DataResult($results, $totalLength);
   }
 
   /**
