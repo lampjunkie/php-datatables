@@ -7,11 +7,37 @@ of this library is to provide an easily extendable framework that allows DataTab
 into any existing application or web framework. The library provides the means to build DataTables that can 
 render data from any source including databases, web services, csv files, etc...
 
+Currently, php-datatables implements a majority of the features and options within DataTables. The remaining
+onces will be added over time.
+
 php-datatables is released with dual licensing, using the GPL v2 (license-gpl2.txt) and an BSD style 
 license (license-bsd.txt). Please see the corresponding license file for details of these licenses. 
 You are free to use, modify and distribute this software, but all copyright information must remain.
 
 ## Overview
+
+Look at the files within the demo/ directory to see a basic example of php-datatables in action.
+
+- ajax.php     
+   
+    A file showing how a json response is rendered for a DataTables ajax request
+    
+- Browser.php     
+    
+    An entity object that is used by DemoDataTable to render the data
+    
+- browsers.csv    
+    
+    A csv file containing the sample data for DemoDataTable
+    
+- DemoDataTable   
+
+    An example DataTable_DataTable implementation which loads data from a csv file
+    
+- index.php      
+
+    A file showing how the initial html/js for a DataTable is rendered
+
 
 ## Class Overview
 
@@ -37,7 +63,7 @@ Here are the basic requirements.
 	
 3. Implement the getTableId() method
 
-	   Simply return a unique id for this table instance. This id is used ass the html id attribute in the rendered
+	   Simply return a unique id for this table instance. This id is used as the html id attribute in the rendered
 	   html table.
 	
 4. Implement getter methods to format colummn values
@@ -49,13 +75,23 @@ Here are the basic requirements.
 	
 	   The only requirement is that your method should expect to receive an entity object as it's only parameter.
 	
+	   Example configuration of getter method for a column:
+	
+	           // configure column
+	           $column = new DataTable_Column();
+	           $column->setName('fullName')
+	                  ->setTitle('Full Name')
+	                  ->setGetMethod('getFullName');
+               
+       Example implementation of getter method defined above:
+               
 			   /**
-			    * Format a column value that combines multiple entity properties
-			    */
-	           protected function getFullName(User $user)
-	           {
-	             return $user->getFirstName() . ' ' . $user->getLastName();
-	           }
+				* Format a column value that combines multiple entity properties
+				*/
+				protected function getFullName(User $user)
+				{
+				  return $user->getFirstName() . ' ' . $user->getLastName();
+				}
 
 5. Implement javascript callback functions
 
