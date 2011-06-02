@@ -194,7 +194,8 @@ abstract class DataTable_DataTable
 
     $data = array(
 			'iTotalRecords' => $result->getNumTotalResults(),
-			'iTotalDisplayRecords' => $result->getNumTotalResults(),
+			'iTotalDisplayRecords' => !is_null($result->getNumFilteredResults()) ? 
+                                        $result->getNumFilteredResults() : $result->getNumTotalResults(),
 			'aaData' => $rows,
 			'sEcho' => $this->request->getEcho(),		
     );
@@ -339,7 +340,7 @@ abstract class DataTable_DataTable
     $js = "
 			<script type=\"text/javascript\">
 			    $(document).ready(function(){
-				var {$this->getTableId()} = $('#{$this->getTableId()}').dataTable({$this->renderDataTableOptions()});
+					var {$this->getTableId()} = $('#{$this->getTableId()}').dataTable({$this->renderDataTableOptions()});
 			    });
 			</script>
 		";

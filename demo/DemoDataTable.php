@@ -141,13 +141,16 @@ class DemoDataTable extends DataTable_DataTable
     // get fake data set
     $results = $this->loadFakeData('browsers.csv');
 
+    // get total length of all results (emulate count(*) query)
+    $totalLength = count($results);
+    
     // search against object array if a search term was passed in
     if(!is_null($request->getSearch())){
       $results = $this->search($results, $request->getSearch(), array('renderingEngine', 'browser', 'platform', 'engineVersion', 'cssGrade'));
     }
 
-    // get total length of all results (emulate count(*) query)
-    $totalLength = count($results);
+    // get the count of the filtered results
+    $filteredTotalLength = count($results);
     
     // sort results by sort column passed in
     $this->sortObjectArray($this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey(), $results, $request->getSortDirection());
@@ -156,7 +159,7 @@ class DemoDataTable extends DataTable_DataTable
     $this->limit($results, $request->getDisplayStart(), $request->getDisplayLength());
     
     // return the final result set
-    return new DataTable_DataResult($results, $totalLength);
+    return new DataTable_DataResult($results, $totalLength, $filteredTotalLength);
   }
 
   /**
