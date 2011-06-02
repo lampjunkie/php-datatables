@@ -146,7 +146,7 @@ class DemoDataTable extends DataTable_DataTable
     
     // search against object array if a search term was passed in
     if(!is_null($request->getSearch())){
-      $results = $this->search($results, $request->getSearch(), array('renderingEngine', 'browser', 'platform', 'engineVersion', 'cssGrade'));
+      $results = $this->search($results, $request->getSearch(), $this->getSearchableColumnNames());
     }
 
     // get the count of the filtered results
@@ -178,7 +178,7 @@ class DemoDataTable extends DataTable_DataTable
    */
   protected function getActions(Browser $browser)
   {
-    $html = "<a href=\"#\" onclick=\"alert('{$browser->getBrowser()}');\">View</a>";
+    $html = "<a href=\"#\" onclick=\"alert('Viewing: {$browser->getBrowser()}');\">View</a>";
     $html .= ' | ';
     $html .= "<a href=\"#\" onclick=\"confirm('Delete {$browser->getBrowser()}?');\">Delete</a>";
     return $html;
@@ -191,7 +191,7 @@ class DemoDataTable extends DataTable_DataTable
    */
   protected function getInvisible(Browser $browser)
   {
-    return $browser->getBrowser() . ' --- ' . $browser->getPlatform();
+    return 'invisible content: ' . $browser->getBrowser();
   }
 
   /**
