@@ -10,10 +10,6 @@ render data from any source including databases, web services, csv files, etc...
 Currently, php-datatables implements a majority of the features and options within DataTables. The remaining
 ones will be added over time.
 
-php-datatables is released with dual licensing, using the GPL v2 (license-gpl2.txt) and an BSD style 
-license (license-bsd.txt). Please see the corresponding license file for details of these licenses. 
-You are free to use, modify and distribute this software, but all copyright information must remain.
-
 ## Overview
 
 The basic steps to using php-datatables are:
