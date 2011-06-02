@@ -33,7 +33,7 @@ class DataTable_Config
    * The default display length of the table
    * @var integer
    */
-  protected $displayLength = 15;
+  protected $displayLength           = 10;
 
   /**
    * The AJAX source URL
@@ -58,11 +58,11 @@ class DataTable_Config
   protected $scrollLoadGap;
   protected $paginationType          = self::PAGINATION_TYPE_FULL_NUMBERS;
   protected $languageConfig;
-  protected $loadingHtml            = '<p>loading data</p>';
-  protected $cookieDuration         = 7200;
-  protected $isSaveStateEnabled     = false;
+  protected $loadingHtml             = '<p>loading data</p>';
+  protected $cookieDuration          = 7200;
+  protected $isSaveStateEnabled      = false;
   protected $cookiePrefix;
-  protected $stripClasses           = array('odd', 'even');
+  protected $stripClasses            = array('odd', 'even');
 
   /**
    * see http://datatables.net/usage/options#sDom
