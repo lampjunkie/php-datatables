@@ -18,7 +18,7 @@
 class DataTable_Autoloader
 {
     /**
-     * Registers Twig_Autoloader as an SPL autoloader.
+     * Registers this as an SPL autoloader.
      */
     static public function register()
     {
