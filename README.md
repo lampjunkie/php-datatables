@@ -123,6 +123,10 @@ This class defines all the configuration options for a DataTable. A DataTable_Da
 a DataTable_Config object. This object set's all the various options that get passed to the javascript table. This
 object also holds a collection of all the DataTable_Column definitions.
 
+Most of the time you will probably want to instantiate the config object in your __construct and pass it on to the parent
+class. However, you can create the config from outside and pass it in to your DataTable_DataTable class. This is useful 
+if you want to load the configuration from somewhere else such as a database, etc.
+
 ### DataTable_Column
 
 This class defines all the options for an individual column within the DataTable. Each column must at the very least
