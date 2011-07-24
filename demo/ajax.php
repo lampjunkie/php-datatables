@@ -30,7 +30,7 @@ include_once('DemoDataTable.php');
 
 // define the Browser Service to use for this demo
 // either 'db' or 'csv'
-define('SERVICE_TO_USE', 'db');
+define('SERVICE_TO_USE', 'csv');
 
 // build a Browser Service object based on the type that was selected
 if(SERVICE_TO_USE == 'db'){

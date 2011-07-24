@@ -107,7 +107,7 @@ class DataTable_Request
   {
     return !(is_null($this->search) || $this->search == '');
   }
-  
+
   public function setEcho($echo)
   {
     $this->echo = $echo;

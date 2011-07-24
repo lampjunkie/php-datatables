@@ -728,10 +728,4 @@ abstract class DataTable_DataTable
       $this->columnIndexNameCache[$column->getName()] = $index;
     }
   }
-
-
-  public function registerPlugin(DataTable_Plugin $plugin)
-  {
-    $this->plugins[] = $plugin;
-  }
 }
