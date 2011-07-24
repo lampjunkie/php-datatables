@@ -15,6 +15,14 @@
  * 
  * Be sure to download the DataTables jQuery plugin from http://http://datatables.net/download/
  * and extract it within this folder
+ * 
+ * Look at ajax.php to see how the data is pulled for the table. By default it is configured
+ * to load the data from a CSV file using the CsvBrowserService. This can be switched to use
+ * the DbBrowserService which will load the data from a MySQL database. This demonstrates
+ * how your DataTable doesn't need to be tied to any specific database implementation, etc.
+ * Thus, you can use your application's existing ORM, services, etc. to deal with the data 
+ * and your DataTable doesn't need to care about where the data came from as long as it's
+ * provided an array of entity objects.
  */
 
 // register the DataTable autoloader

@@ -9,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-// include the Browser entity class
-include('Browser.php');
-
 /**
  * Demonstration of implementing DataTable_DataTable
  * 
  * This class shows how to extend and implement DataTable_DataTable
  * 
  * As a simple example this table is set up as an AJAX-enabled
- * table and pulls it's data from the local 'browsers.csv' file.
+ * table and pulls it's data from a given IBrowserService implementation
  * 
  */
 class DemoDataTable extends DataTable_DataTable
@@ -128,6 +125,18 @@ class DemoDataTable extends DataTable_DataTable
   }
 
   /**
+   * Set the IBrowserService implementation
+   * 
+   * This is the service object where we will pull our data from
+   * 
+   * @param IBrowserService $browserService
+   */
+  public function setBrowserService(IBrowserService $browserService)
+  {
+    $this->browserService = $browserService;
+  }
+
+  /**
    * Load the data for a request
    * 
    * This demo emulates loading data from a database and performing
@@ -138,28 +147,47 @@ class DemoDataTable extends DataTable_DataTable
    */
   public function loadData(DataTable_Request $request)
   {
-    // get fake data set
-    $results = $this->loadFakeData('browsers.csv');
-
-    // get total length of all results (emulate count(*) query)
-    $totalLength = count($results);
+    // get the name of the sort property that was passed in
+    $sortProperty = $this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey();
     
-    // search against object array if a search term was passed in
-    if(!is_null($request->getSearch())){
-      $results = $this->search($results, $request->getSearch(), $this->getSearchableColumnNames());
+    // check if a search term was passed in
+    if($request->hasSearch()){
+      
+      // call the searchAll() service method
+      $results = $this->browserService->searchAll($request->getSearch(), 
+                                                  $this->getSearchableColumnNames(), 
+                                                  $request->getDisplayStart(), 
+                                                  $request->getDisplayLength(), 
+                                                  $sortProperty, 
+                                                  $request->getSortDirection());
+      
+      // get the total number of results (for pagination)
+      $totalLength = $this->browserService->searchAll($request->getSearch(), 
+                                                      $this->getSearchableColumnNames(), 
+                                                      $request->getDisplayStart(), 
+                                                      $request->getDisplayLength(), 
+                                                      $sortProperty, 
+                                                      $request->getSortDirection(), 
+                                                      true);
+    
+    } else {
+      
+      // call the getAll() service method
+      $results = $this->browserService->getAll($request->getDisplayStart(), 
+                                               $request->getDisplayLength(), 
+                                               $sortProperty, 
+                                               $request->getSortDirection());
+      
+      // get the total number of results (for pagination)
+      $totalLength = $this->browserService->getAll($request->getDisplayStart(), 
+                                                   $request->getDisplayLength(), 
+                                                   $sortProperty, 
+                                                   $request->getSortDirection(), 
+                                                   true);
     }
 
-    // get the count of the filtered results
-    $filteredTotalLength = count($results);
-    
-    // sort results by sort column passed in
-    $this->sortObjectArray($this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey(), $results, $request->getSortDirection());
-
-    // limit the results based on parameters passed in
-    $this->limit($results, $request->getDisplayStart(), $request->getDisplayLength());
-    
     // return the final result set
-    return new DataTable_DataResult($results, $totalLength, $filteredTotalLength);
+    return new DataTable_DataResult($results, $totalLength, $totalLength);
   }
 
   /**
@@ -212,121 +240,5 @@ class DemoDataTable extends DataTable_DataTable
     			return nRow;
             }
     ";
-  }
-
-  /**
-   * ==========================================================================
-   * Utility Methods for Demo
-   * ==========================================================================
-   */
-
-  /**
-   * Get an array of Browser objects
-   * 
-   * @return array
-   */
-  private function loadFakeData($file)
-  {
-    $browsers = array();
-    
-    if (($handle = fopen($file, "r")) !== FALSE) {
-      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $browsers[] = new Browser($data[0], $data[1], $data[2], $data[3], $data[4]);
-      }
-      fclose($handle);
-    }
-
-    return $browsers;
-  }
-
-  /**
-   * Sort an array of objects by an object property
-   * 
-   * @param string $field
-   * @param array $arr
-   * @param string $sorting
-   * @param boolean $case_insensitive
-   */
-  private function sortObjectArray($field, &$arr, $sorting='asc', $case_insensitive=true)
-  {
-    $field = 'get' . ucfirst($field);
-    if(is_array($arr) && (count($arr)>0) && ( ( is_array($arr[0]) && isset($arr[0][$field]) ) || ( is_object($arr[0]) && method_exists($arr[0], $field) ) ) ){
-      if($case_insensitive==true) $strcmp_fn = "strnatcasecmp";
-      else $strcmp_fn = "strnatcmp";
-
-      if($sorting=='asc'){
-        $fn = create_function('$a,$b', '
-                    if(is_object($a) && is_object($b)){
-                        return '.$strcmp_fn.'($a->'.$field.'(), $b->'.$field.'());
-                    }else if(is_array($a) && is_array($b)){
-                        return '.$strcmp_fn.'($a["'.$field.'()"], $b["'.$field.'"]);
-                    }else return 0;
-                ');
-      } else {
-        $fn = create_function('$a,$b', '
-                    if(is_object($a) && is_object($b)){
-                        return '.$strcmp_fn.'($b->'.$field.'(), $a->'.$field.'());
-                    }else if(is_array($a) && is_array($b)){
-                        return '.$strcmp_fn.'($b["'.$field.'()"], $a["'.$field.'()"]);
-                    }else return 0;
-                ');
-      }
-      usort($arr, $fn);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  /**
-   * Get a subset of an input array
-   * 
-   * @param array $arr
-   * @param integer $start
-   * @param integer $length
-   */
-  private function limit(&$arr, $start, $length)
-  {
-    $arr = array_slice($arr, $start, $length);
-  }
-
-  /**
-   * Search for a given search term within the given properties
-   * of an array of objects
-   * 
-   * @param array $objects
-   * @param string $search
-   * @param array $properties
-   */
-  private function search($objects, $search, $properties)
-  {
-    $results = array();
-
-    $search = strtolower($search);
-    
-    $regex = "/^{$search}/";
-
-    if(is_null($objects) || count($objects) == 0){
-      return $results;
-    }
-    
-    foreach($objects as $object){
-
-      foreach($properties as $property){
-
-        $getter = 'get' . ucfirst($property);
-
-        $value = strtolower($object->$getter());
-
-        preg_match($regex, $value, $matches);
-
-        if(count($matches) > 0){
-          $results[] = $object;
-          break;
-        }
-      }
-    }
-
-    return $results;
   }
 }
