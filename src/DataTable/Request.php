@@ -30,16 +30,11 @@ class DataTable_Request
   protected $displayLength;
   
   /**
-   * The index number of the column to sort on
-   * @var integer
+   * Array of current sort column indexes and directions
+   * 
+   * @var array
    */
-  protected $sortColumnIndex;
-  
-  /**
-   * The current sort direction
-   * @var string
-   */
-  protected $sortDirection;
+  protected $sortColumns;
 
   /**
    * The search string
@@ -73,24 +68,60 @@ class DataTable_Request
     return $this->displayLength;
   }
 
-  public function setSortColumnIndex($sortColumnIndex)
-  {
-    $this->sortColumnIndex = $sortColumnIndex;
-  }
-
+  /**
+   * Get the first sort column index
+   * 
+   * This method always returns the first column
+   * index of the current sort column and should
+   * be used when you only want to sort against one
+   * column. Otherwise, you should use getSortColumns()
+   * to get all of the sort column indexes and directions.
+   * 
+   * @return integer
+   */
   public function getSortColumnIndex()
   {
-    return $this->sortColumnIndex;
+    $keys = array_keys($this->sortColumns);
+    return $keys[0];
   }
-
-  public function setSortDirection($sortDirection)
-  {
-    $this->sortDirection = $sortDirection;
-  }
-
+  
+  /**
+   * Get the first sort column direction
+   * 
+   * This method always returns the first column
+   * sort direction of the current sort column and should
+   * be used when you only want to sort against one
+   * column. Otherwise, you should use getSortColumns()
+   * to get all of the sort column indexes and directions.
+   * 
+   * @return string
+   */
   public function getSortDirection()
   {
-    return $this->sortDirection;
+    $values = array_values($this->sortColumns);
+    return $values[0];
+  }
+  
+  /**
+   * Get all of the current sort columns
+   * 
+   * This method will return an array containing
+   * the column index as the key, and the sort
+   * direction as the value.
+   * 
+   * Example:
+   *   array(2 => 'asc', 3 => 'desc')
+   *
+   * @return array
+   */
+  public function getSortColumns()
+  {
+      return $this->sortColumns;
+  }
+
+  public function setSortColumns($sortColumns)
+  {
+      $this->sortColumns = $sortColumns;
   }
 
   public function setSearch($search)
@@ -125,11 +156,19 @@ class DataTable_Request
    */
   public function fromPhpRequest(array $request)
   {
-    $this->setSortColumnIndex($request['iSortCol_0']);
-    $this->setSortDirection($request['sSortDir_0']);
     $this->setDisplayLength($request['iDisplayLength']);
     $this->setDisplayStart($request['iDisplayStart']);
     $this->setEcho($request['sEcho']);
     $this->setSearch($request['sSearch']);
+    
+    $num = $request['iSortingCols'];
+    
+    $sortCols = array();
+    
+    for($x=0; $x<$num; $x++){
+      $sortCols[$request['iSortCol_' . $x]] = $request['sSortDir_' . $x];
+    }
+    
+    $this->setSortColumns($sortCols);
   }
 }

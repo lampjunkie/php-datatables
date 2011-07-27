@@ -149,7 +149,7 @@ class DemoDataTable extends DataTable_DataTable
   {
     // get the name of the sort property that was passed in
     $sortProperty = $this->config->getColumns()->get($request->getSortColumnIndex())->getSortKey();
-    
+
     // check if a search term was passed in
     if($request->hasSearch()){
       

@@ -221,4 +221,18 @@ config object to let your loadData method know how to limit your results.
         // let your loadData() method know to limit to 200 results
         $config->setStaticMaxLength(200);
 	
-		
+## Multi-Column Sorting
+
+If you need to sort against multiple columns, you can easily get the sorting information
+of all of the columns from the DataTable_Request object.
+
+  Example:
+  
+        public function loadData(DataTable_Request $request)
+        {
+          foreach($request->getSortColumns() as $sortColIndex => $sortDir){
+            $sortKey = $this->getColumns()->get($sortColIndex)->getSortKey();
+            
+            // do something with $sortKey and $sortDir
+          }
+        }
