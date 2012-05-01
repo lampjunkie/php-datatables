@@ -459,11 +459,13 @@ abstract class DataTable_DataTable
    */
   protected function replaceJsonFunctions($json)
   {
-    foreach($this->jsonFunctions as $key => $function){
+    if(!is_null($this->jsonFunctions)){
+      foreach($this->jsonFunctions as $key => $function){
       
-      $search = '"' . $key . '"';
+        $search = '"' . $key . '"';
       
-      $json = str_replace($search, $function, $json);
+        $json = str_replace($search, $function, $json);
+      }
     }
     
     return $json;
