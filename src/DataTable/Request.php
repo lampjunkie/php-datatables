@@ -159,7 +159,7 @@ class DataTable_Request
     $this->setDisplayLength($request['iDisplayLength']);
     $this->setDisplayStart($request['iDisplayStart']);
     $this->setEcho($request['sEcho']);
-    $this->setSearch($request['sSearch']);
+    $this->setSearch(isset($request['sSearch']) ? $request['sSearch'] : null);
     
     $num = $request['iSortingCols'];
     
