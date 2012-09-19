@@ -1,0 +1,22 @@
+{
+    "name": "lampjunkie/php-datatables",
+    "type": "library",
+    "description": "PHP Library for (http://www.datatables.net)",
+    "keywords": ["datatables","ajax","table"],
+    "homepage": "https://github.com/lampjunkie/php-datatables",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Roulias",
+            "email": "marc@lampjunkie.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.4"
+    },
+    "autoload": {
+        "psr-0" : {
+            "DataTable_" : "src/"
+        }
+    }
+}
